@@ -1,6 +1,10 @@
 import React from 'react';
 import usePortfolioStore from '../store/usePortfolioStore';
 import portfolioData from '../data/portfolioData';
+import TermsOfService from './TermsOfService';
+import PrivacyPolicy from './PrivacyPolicy';
+import RefundPolicy from './RefundPolicy';
+import Tokushoho from './Tokushoho';
 import './OverlayUI.css';
 
 /**
@@ -21,13 +25,19 @@ export default function OverlayUI() {
     return (
         <div className={`overlay-panel ${isOverlayVisible ? 'visible' : ''}`}>
             <button className="back-btn" onClick={handleBack}>
-                ← Back to Bar
+                ← Back to Forest
             </button>
 
-            {currentTarget === 'arcade' && <GamesPanel />}
-            {currentTarget === 'jukebox' && <ProjectsPanel />}
-            {currentTarget === 'phone' && <ContactPanel />}
-            {currentTarget === 'board' && <AboutPanel />}
+            {currentTarget === 'strawberry' && <GamesPanel />}
+            {currentTarget === 'orange' && <AboutPanel />}
+            {currentTarget === 'grape' && <ProjectsPanel />}
+            {currentTarget === 'apple' && <ContactPanel />}
+
+            {/* Legal Pages */}
+            {currentTarget === 'terms' && <TermsOfService />}
+            {currentTarget === 'privacy' && <PrivacyPolicy />}
+            {currentTarget === 'refund' && <RefundPolicy />}
+            {currentTarget === 'tokushoho' && <Tokushoho />}
         </div>
     );
 }
@@ -59,7 +69,7 @@ function GamesPanel() {
 function ProjectsPanel() {
     return (
         <div className="panel-content">
-            <h2 className="panel-title">🎵 Projects</h2>
+            <h2 className="panel-title">🚀 Projects</h2>
             <div className="card-grid">
                 {portfolioData.projects.map((project) => (
                     <a href={project.url} target="_blank" rel="noopener noreferrer" key={project.id} className="project-card">
@@ -82,14 +92,24 @@ function ProjectsPanel() {
 
 function ContactPanel() {
     const { email, github, linkedin, twitter } = portfolioData.contact;
+    const setTarget = usePortfolioStore((s) => s.setTarget);
+
     return (
         <div className="panel-content">
             <h2 className="panel-title">📞 Contact</h2>
             <div className="contact-list">
                 <a href={`mailto:${email}`} className="contact-item">✉️ {email}</a>
-                <a href={github} target="_blank" rel="noopener noreferrer" className="contact-item">🐱 GitHub</a>
-                <a href={linkedin} target="_blank" rel="noopener noreferrer" className="contact-item">💼 LinkedIn</a>
-                <a href={twitter} target="_blank" rel="noopener noreferrer" className="contact-item">🐦 Twitter</a>
+                {github && <a href={github} target="_blank" rel="noopener noreferrer" className="contact-item">🐱 GitHub</a>}
+                {linkedin && <a href={linkedin} target="_blank" rel="noopener noreferrer" className="contact-item">💼 LinkedIn</a>}
+                {twitter && <a href={twitter} target="_blank" rel="noopener noreferrer" className="contact-item">🐦 Twitter</a>}
+            </div>
+
+            <div className="legal-links mt-8 border-t border-gray-200 dark:border-gray-700 pt-4 flex flex-col gap-2">
+                <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-2">Legal</h3>
+                <button onClick={() => setTarget('terms')} className="text-left text-sm text-gray-600 dark:text-gray-300 hover:text-blue-500 transition-colors">Terms of Service</button>
+                <button onClick={() => setTarget('privacy')} className="text-left text-sm text-gray-600 dark:text-gray-300 hover:text-blue-500 transition-colors">Privacy Policy</button>
+                <button onClick={() => setTarget('refund')} className="text-left text-sm text-gray-600 dark:text-gray-300 hover:text-blue-500 transition-colors">Refund Policy</button>
+                <button onClick={() => setTarget('tokushoho')} className="text-left text-sm text-gray-600 dark:text-gray-300 hover:text-blue-500 transition-colors">Tokushoho</button>
             </div>
         </div>
     );

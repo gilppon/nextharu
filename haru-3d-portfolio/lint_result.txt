@@ -1,0 +1,10 @@
+
+E:\nextharu\haru-3d-portfolio\src\components\CameraController.jsx
+  64:8  warning  React Hook useEffect has missing dependencies: 'camera', 'completeIntro', and 'introComplete'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+  93:8  warning  React Hook useEffect has missing dependencies: 'camera.position' and 'showOverlay'. Either include them or remove the dependency array             react-hooks/exhaustive-deps
+
+E:\nextharu\haru-3d-portfolio\src\components\LoadingScreen.jsx
+  3:10  error  'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+✖ 3 problems (1 error, 2 warnings)
+

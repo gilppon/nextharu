@@ -17,7 +17,8 @@ export default function CameraController() {
     const showOverlay = usePortfolioStore((s) => s.showOverlay);
     const introComplete = usePortfolioStore((s) => s.introComplete);
     const completeIntro = usePortfolioStore((s) => s.completeIntro);
-    const lookAtTarget = useRef(new THREE.Vector3(0, 0.5, 0));
+    const lookAtTarget = useRef(new THREE.Vector3(0, 3, 0));
+    const isAnimating = useRef(false);
 
     // DEBUG: Log camera position on key press 'L'
     useEffect(() => {
@@ -36,13 +37,14 @@ export default function CameraController() {
         return () => window.removeEventListener('keydown', handleKeyDown);
     }, [camera]);
 
-    // Intro animation: start near entrance and fly in smoothly
+    // Intro animation: start closer to front and fly in smoothly
     useEffect(() => {
         if (!introComplete) {
-            camera.position.set(0, 1.5, 4.5); // Start closer to the entrance
-            lookAtTarget.current.set(0, 0.8, 0); // Look slightly up/forward
+            camera.position.set(0, 4, 10); // Front view
+            lookAtTarget.current.set(0, 4, 0); // Focus straight on
             camera.lookAt(lookAtTarget.current);
 
+            isAnimating.current = true;
             gsap.to(camera.position, {
                 x: CAMERA_TARGETS.entrance.position[0],
                 y: CAMERA_TARGETS.entrance.position[1],
@@ -51,6 +53,7 @@ export default function CameraController() {
                 ease: 'power3.inOut',
                 onComplete: () => {
                     completeIntro();
+                    isAnimating.current = false;
                 },
             });
             gsap.to(lookAtTarget.current, {
@@ -61,6 +64,7 @@ export default function CameraController() {
                 ease: 'power3.inOut',
             });
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     // Transition animation when target changes
@@ -70,6 +74,7 @@ export default function CameraController() {
         const target = CAMERA_TARGETS[currentTarget];
         if (!target) return;
 
+        isAnimating.current = true;
         gsap.to(camera.position, {
             x: target.position[0],
             y: target.position[1],
@@ -77,6 +82,7 @@ export default function CameraController() {
             duration: 2,
             ease: 'power3.inOut',
             onComplete: () => {
+                isAnimating.current = false;
                 if (currentTarget !== 'entrance') {
                     showOverlay();
                 }
@@ -90,11 +96,14 @@ export default function CameraController() {
             duration: 2,
             ease: 'power3.inOut',
         });
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [currentTarget, introComplete]);
 
-    // Continuously update camera lookAt
+    // Continuously update camera lookAt only if animating or focused on a specific target
     useFrame(() => {
-        camera.lookAt(lookAtTarget.current);
+        if (isAnimating.current || currentTarget !== 'entrance' || !introComplete) {
+            camera.lookAt(lookAtTarget.current);
+        }
     });
 
     return null;

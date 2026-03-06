@@ -1,39 +1,52 @@
 /**
- * Camera target positions and lookAt points.
- * Model is scaled to 0.5 and offset by Y=-1.5
- * 
- * Layout (from screenshots):
- * Far Left:  Arcade machine, sports memorabilia wall
- * Center-Left: Vend-o-mat (green machine), door
- * Center: Tables, chairs, green carpet floor
- * Center-Right: Bar counter with bottles, "Good Ol' Days" sign
- * Far Right: TV screen, jukebox area
+ * Camera target positions and lookAt points for the 3D Portfolio.
+ * Measurements are estimated based on House scale (9.5) and position (2, 5, 0).
  */
 const CAMERA_TARGETS = {
   entrance: {
-    position: [0, 1.2, 2.0], // Positioned inside the bar
-    lookAt: [0, 0.8, -1.0],  // Looking straight forward (not at the floor)
+    position: [0, 4, 10], // Front view, zoomed in
+    lookAt: [0, 4, 0],     // Look straight at the house body
     label: 'Welcome',
   },
-  arcade: {
-    position: [-1.8, 0.6, 1.5],
-    lookAt: [-2.5, 0.3, 0],
-    label: '🎮 Games',
+  orange: {
+    position: [0.5, 5.5, 6],
+    lookAt: [0.5, 4.5, 1],
+    label: '🍊 Orange',
   },
-  jukebox: {
-    position: [1.8, 0.6, 1.5],
-    lookAt: [2.5, 0.3, 0],
-    label: '🎵 Projects',
+  strawberry: {
+    position: [2, 11, 8],
+    lookAt: [2, 9, 1],
+    label: '🍓 Strawberry',
   },
-  phone: {
-    position: [0.5, 0.6, 0.5],
-    lookAt: [1.5, 0.3, -0.8],
-    label: '📞 Contact',
+  grape: {
+    position: [-4, 8, 6],
+    lookAt: [-2.5, 6.5, 1],
+    label: '🍇 Grape',
   },
-  board: {
-    position: [-0.5, 0.6, 0.5],
-    lookAt: [-1.5, 0.5, -0.8],
-    label: '📋 About Me',
+  apple: {
+    position: [4.5, 7, 5],
+    lookAt: [4.5, 6.5, 0],
+    label: '🍎 Apple',
+  },
+  terms: {
+    position: [4.5, 7, 5],
+    lookAt: [4.5, 6.5, 0],
+    label: 'Terms of Service',
+  },
+  privacy: {
+    position: [4.5, 7, 5],
+    lookAt: [4.5, 6.5, 0],
+    label: 'Privacy Policy',
+  },
+  refund: {
+    position: [4.5, 7, 5],
+    lookAt: [4.5, 6.5, 0],
+    label: 'Refund Policy',
+  },
+  tokushoho: {
+    position: [4.5, 7, 5],
+    lookAt: [4.5, 6.5, 0],
+    label: 'Tokushoho (Specified Commercial Transactions Act)',
   },
 };
 

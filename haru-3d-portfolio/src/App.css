@@ -61,7 +61,7 @@ canvas {
    ============================================ */
 .nav-hints {
   position: fixed;
-  bottom: 2rem;
+  bottom: 5rem;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
@@ -129,4 +129,63 @@ canvas {
 
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(255, 255, 255, 0.3);
+}
+
+/* ============================================
+   Footer Legal Links
+   ============================================ */
+.footer-legal-container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding-top: 2rem;
+  padding-bottom: 1rem;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+  pointer-events: auto;
+}
+
+.footer-legal-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.footer-btn {
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.6);
+  cursor: pointer;
+  transition: color 0.2s ease;
+  font-size: inherit;
+  font-weight: normal;
+}
+
+.footer-btn:hover {
+  color: #fff;
+  border-color: transparent;
+  background: transparent;
+  transform: none;
+  box-shadow: none;
+}
+
+.footer-btn:focus,
+.footer-btn:focus-visible {
+  outline: none;
+}
+
+.footer-copyright {
+  font-size: 0.65rem;
+  color: rgba(255, 255, 255, 0.4);
 }

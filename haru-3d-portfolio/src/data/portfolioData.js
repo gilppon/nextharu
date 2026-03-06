@@ -8,52 +8,43 @@
  */
 
 const portfolioData = {
-  // 🎮 오락기 (Arcade Machine) 클릭 시 표시
+  // 🍓 딸기 (Strawberry | ADVENTURE) 클릭 시 표시
   games: [
-    {
-      id: 'animal-world-cup',
-      title: 'Animal World Cup',
-      description: '동물들의 월드컵 대결! 귀여운 동물 캐릭터로 축구를 즐기세요.',
-      url: 'https://game.haruharu.me',
-      thumbnail: '/thumbnails/animal-world-cup.png',
-      tags: ['Game', 'Mobile', 'Unity'],
-    },
     {
       id: 'japan-run-fit',
       title: 'Japan Run Fit',
       description: '달리면서 일본을 여행하는 피트니스 러닝 게임.',
-      url: 'https://fit.haruharu.me',
+      url: 'https://fit.next-haru.com',
       thumbnail: '/thumbnails/japan-run-fit.png',
       tags: ['Fitness', 'Game', 'Flutter'],
     },
   ],
 
-  // 🎵 주크박스 (Jukebox) 클릭 시 표시
+  // 🍊 오렌지 (Orange | ROOTS) 클릭 시 표시
+  about: {
+    name: 'Next Haru',
+    title: 'AI Crafting Digital Solutions for Everyday Life',
+    bio: `As a Korean developer and father of two living in Japan, my greatest inspiration comes from the chaos and beauty of real life. Whether it’s an AI tool for busy parents, an immersive game, or a fitness app that moves the soul, I create at the synergy of technology and human experience. I believe that the best code is written with empathy, designed to make every "Nextharu" (Next Day) better than the last`,
+    skills: ['React', 'Flutter', 'Unity', 'Firebase', 'Three.js', 'Node.js'],
+  },
+
+  // 🍇 포도 (Grape | TREASURES) 클릭 시 표시
   projects: [
     {
       id: 'diet-app',
-      title: '식단 관리 & 가계부',
-      description: '일상의 식단과 가계부를 한 곳에서 관리하는 올인원 앱.',
+      title: '가계부',
+      description: '가계부앱.',
       url: 'https://app.haruharu.me',
       thumbnail: '/thumbnails/diet-app.png',
       tags: ['Web App', 'React', 'Firebase'],
     },
   ],
 
-  // 📞 전화기 (Phone) 클릭 시 표시
+  // 🍎 사과 (Apple | HELLO) 클릭 시 표시
   contact: {
-    email: 'hello@haruharu.me',
-    github: 'https://github.com/haruharu',
-    linkedin: 'https://linkedin.com/in/haruharu',
-    twitter: 'https://twitter.com/haruharu',
-  },
-
-  // 📋 게시판 (Board) 클릭 시 표시
-  about: {
-    name: 'HaruHaru',
-    title: 'AI 1인 기업 대표 & Full-Stack Developer',
-    bio: '게임, 앱, 피트니스 분야를 아우르는 크리에이터입니다. 기술과 창의성의 교차점에서 새로운 경험을 만들어갑니다.',
-    skills: ['React', 'Flutter', 'Unity', 'Firebase', 'Three.js', 'Node.js'],
+    email: 'support@next-haru.com',
+    github: 'https://github.com/gilppon',
+    twitter: 'https://twitter.com/nextharu',
   },
 };
 
