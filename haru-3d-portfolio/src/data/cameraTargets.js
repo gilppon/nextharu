@@ -46,7 +46,7 @@ const CAMERA_TARGETS = {
   tokushoho: {
     position: [4.5, 7, 5],
     lookAt: [4.5, 6.5, 0],
-    label: 'Tokushoho (Specified Commercial Transactions Act)',
+    label: 'Legal Notice (特定商取引法に基づく表記)',
   },
 };
 

@@ -50,12 +50,16 @@ function GamesPanel() {
                 {portfolioData.games.map((game) => (
                     <a href={game.url} target="_blank" rel="noopener noreferrer" key={game.id} className="project-card">
                         <div className="card-thumbnail">
-                            <span className="card-emoji">🎮</span>
+                            {game.thumbnail ? (
+                                <img src={game.thumbnail} alt={game.title} className="card-image" />
+                            ) : (
+                                <span className="card-emoji">🎮</span>
+                            )}
                         </div>
                         <h3>{game.title}</h3>
                         <p>{game.description}</p>
                         <div className="tag-row">
-                            {game.tags.map((tag) => (
+                            {game.tags?.map((tag) => (
                                 <span key={tag} className="tag">{tag}</span>
                             ))}
                         </div>
@@ -74,12 +78,16 @@ function ProjectsPanel() {
                 {portfolioData.projects.map((project) => (
                     <a href={project.url} target="_blank" rel="noopener noreferrer" key={project.id} className="project-card">
                         <div className="card-thumbnail">
-                            <span className="card-emoji">📱</span>
+                            {project.thumbnail ? (
+                                <img src={project.thumbnail} alt={project.title} className="card-image" />
+                            ) : (
+                                <span className="card-emoji">📱</span>
+                            )}
                         </div>
                         <h3>{project.title}</h3>
                         <p>{project.description}</p>
                         <div className="tag-row">
-                            {project.tags.map((tag) => (
+                            {project.tags?.map((tag) => (
                                 <span key={tag} className="tag">{tag}</span>
                             ))}
                         </div>

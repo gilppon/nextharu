@@ -54,7 +54,7 @@ function FooterLegalLinks() {
         <span>|</span>
         <button onClick={() => setTarget('refund')} className="footer-btn">Refund Policy</button>
         <span>|</span>
-        <button onClick={() => setTarget('tokushoho')} className="footer-btn">Tokushoho</button>
+        <button onClick={() => setTarget('tokushoho')} className="footer-btn">Legal Notice (特定商取引法に基づく表記)</button>
       </div>
       <div className="footer-copyright">
         &copy; 2026 NEXT-HARU. All rights reserved.
