@@ -5,6 +5,7 @@ import TermsOfService from './TermsOfService';
 import PrivacyPolicy from './PrivacyPolicy';
 import RefundPolicy from './RefundPolicy';
 import Tokushoho from './Tokushoho';
+import { Helmet } from 'react-helmet-async';
 import './OverlayUI.css';
 
 /**
@@ -22,8 +23,23 @@ export default function OverlayUI() {
         setTarget('entrance');
     };
 
+    // Dynamic Title Mapping
+    const titles = {
+        strawberry: 'Games | Next Haru',
+        orange: 'About Me | Next Haru',
+        grape: 'Projects | Next Haru',
+        apple: 'Contact | Next Haru',
+        terms: 'Terms of Service | Next Haru',
+        privacy: 'Privacy Policy | Next Haru',
+        refund: 'Refund Policy | Next Haru',
+        tokushoho: 'Legal Notice | Next Haru',
+    };
+
     return (
         <div className={`overlay-panel ${isOverlayVisible ? 'visible' : ''}`}>
+            <Helmet>
+                <title>{titles[currentTarget] || 'Next Haru'}</title>
+            </Helmet>
             <button className="back-btn" onClick={handleBack}>
                 ← Back to Forest
             </button>

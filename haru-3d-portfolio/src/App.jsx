@@ -9,6 +9,7 @@ import OverlayUI from './components/OverlayUI';
 import LoadingScreen from './components/LoadingScreen';
 import usePortfolioStore from './store/usePortfolioStore';
 import CAMERA_TARGETS from './data/cameraTargets';
+import { HelmetProvider } from 'react-helmet-async';
 import './App.css';
 
 function NavHints() {
@@ -68,42 +69,44 @@ function App() {
   const currentTarget = usePortfolioStore((s) => s.currentTarget);
 
   return (
-    <ErrorBoundary>
-      <div className="app-container">
-        <LoadingScreen />
+    <HelmetProvider>
+      <ErrorBoundary>
+        <div className="app-container">
+          <LoadingScreen />
 
-        <Canvas
-          camera={{ fov: 60, near: 0.1, far: 500, position: [0, 4, 10] }}
-          shadows
-          gl={{ antialias: true, alpha: false }}
-          style={{ background: '#88ccff' }}
-        >
-          <Suspense fallback={null}>
-            <ForestScene />
-            <HitboxZones />
-            <CameraController />
-            <OrbitControls
-              enabled={introComplete && currentTarget === 'entrance'}
-              target={CAMERA_TARGETS.entrance.lookAt}
-              makeDefault
-              enablePan={true}
-              enableZoom={true}
-              maxPolarAngle={Math.PI / 2 + 0.1} // Prevent going below ground
-              minDistance={3}
-              maxDistance={25}
-            />
-          </Suspense>
-        </Canvas>
+          <Canvas
+            camera={{ fov: 60, near: 0.1, far: 500, position: [0, 4, 10] }}
+            shadows
+            gl={{ antialias: true, alpha: false }}
+            style={{ background: '#88ccff' }}
+          >
+            <Suspense fallback={null}>
+              <ForestScene />
+              <HitboxZones />
+              <CameraController />
+              <OrbitControls
+                enabled={introComplete && currentTarget === 'entrance'}
+                target={CAMERA_TARGETS.entrance.lookAt}
+                makeDefault
+                enablePan={true}
+                enableZoom={true}
+                maxPolarAngle={Math.PI / 2 + 0.1} // Prevent going below ground
+                minDistance={3}
+                maxDistance={25}
+              />
+            </Suspense>
+          </Canvas>
 
-        <NavHints />
-        <OverlayUI />
-        <FooterLegalLinks />
+          <NavHints />
+          <OverlayUI />
+          <FooterLegalLinks />
 
-        <header className="site-header">
-          <span className="logo">NEXT-HARU</span>
-        </header>
-      </div>
-    </ErrorBoundary>
+          <header className="site-header">
+            <span className="logo">NEXT-HARU</span>
+          </header>
+        </div>
+      </ErrorBoundary>
+    </HelmetProvider>
   );
 }
 

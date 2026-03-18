@@ -1,46 +1,11 @@
+import React from 'react';
 import usePortfolioStore from '../store/usePortfolioStore';
 
 /**
- * HitboxZones - Invisible clickable meshes placed at interactive locations.
- * Model is at scale=0.5, position=[0, -1.5, 0]
- * 
- * These transparent boxes capture mouse clicks via raycasting
- * and trigger camera transitions.
- * 
- * Layout mapping:
- * - arcade: Left wall area (arcade machine + sports items)
- * - jukebox: Right side of bar (bottles display area)  
- * - phone: Bar counter center area
- * - board: Left wall with framed photos/posters
+ * FruitHitbox - Invisible proxy hitboxes for the 3D fruit models on the house.
+ * These hitboxes trigger the camera animation and show the corresponding UI overlay.
  */
-const zones = [
-    {
-        name: 'arcade',
-        position: [-2.5, 0.2, 0.8],
-        size: [1.2, 1.5, 1.2],
-        color: '#ff4444',
-    },
-    {
-        name: 'jukebox',
-        position: [2.5, 0.2, 0.5],
-        size: [1.2, 1.5, 1.2],
-        color: '#44ff44',
-    },
-    {
-        name: 'phone',
-        position: [1.2, 0.2, -0.5],
-        size: [1.0, 1.2, 1.0],
-        color: '#4444ff',
-    },
-    {
-        name: 'board',
-        position: [-1.5, 0.4, -0.5],
-        size: [1.0, 1.2, 1.0],
-        color: '#ff44ff',
-    },
-];
-
-function HitboxZone({ name, position, size, color }) {
+function FruitHitbox({ name, position, size = [0.8, 0.8, 0.8] }) {
     const setTarget = usePortfolioStore((s) => s.setTarget);
 
     return (
@@ -60,10 +25,9 @@ function HitboxZone({ name, position, size, color }) {
         >
             <boxGeometry args={size} />
             <meshStandardMaterial
-                color={color}
+                color="red"
                 transparent
-                opacity={0} // Invisible in production
-                wireframe={false}
+                opacity={0} // Invisible hitboxes
             />
         </mesh>
     );
@@ -72,9 +36,20 @@ function HitboxZone({ name, position, size, color }) {
 export default function HitboxZones() {
     return (
         <group>
-            {zones.map((zone) => (
-                <HitboxZone key={zone.name} {...zone} />
-            ))}
+            {/* These coordinates should match the 'lookAt' points in cameraTargets.js */}
+            {/* to ensure the hitboxes are placed exactly over the visual fruits. */}
+            
+            {/* Orange | ROOTS */}
+            <FruitHitbox name="orange" position={[0.5, 4.5, 1]} />
+
+            {/* Strawberry | ADVENTURE */}
+            <FruitHitbox name="strawberry" position={[2, 9, 1]} />
+
+            {/* Grape | TREASURES */}
+            <FruitHitbox name="grape" position={[-2.5, 6.5, 1]} />
+
+            {/* Apple | HELLO */}
+            <FruitHitbox name="apple" position={[4.5, 6.5, 0]} />
         </group>
     );
 }
