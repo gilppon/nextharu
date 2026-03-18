@@ -11,6 +11,14 @@ const portfolioData = {
   // 🍓 딸기 (Strawberry | ADVENTURE) 클릭 시 표시
   games: [
     {
+      id: 'vocal-orbit',
+      title: 'Vocal Orbit',
+      description: 'A voice-controlled space flight game. Pilot your spaceship using your own voice!',
+      url: 'https://vocal.next-haru.com',
+      thumbnail: '/thumbnails/vocal-orbit.png',
+      tags: ['Voice Control', 'Game', 'Expo Web'],
+    },
+    {
       id: 'japan-run-fit',
       title: 'Japan Run Fit',
       description: 'A fitness running game that lets you travel through Japan while you run.',
