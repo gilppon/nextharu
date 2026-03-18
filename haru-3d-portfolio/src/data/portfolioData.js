@@ -24,7 +24,7 @@ const portfolioData = {
       description: 'A fitness running game that lets you travel through Japan while you run.',
       url: 'https://fit.next-haru.com',
       thumbnail: '/thumbnails/japan-run-fit.png',
-      tags: ['Fitness', 'Game', 'Flutter'],
+      tags: ['Fitness', 'Game'],
     },
   ],
 
