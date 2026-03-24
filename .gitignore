@@ -23,3 +23,7 @@ dist-ssr
 *.sln
 *.sw?
 *.bak.glb
+
+# Lint results
+lint*.json
+lint*.txt

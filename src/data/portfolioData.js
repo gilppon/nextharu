@@ -39,12 +39,12 @@ const portfolioData = {
   // 🍇 포도 (Grape | TREASURES) 클릭 시 표시
   projects: [
     {
-      id: 'diet-app',
-      title: 'Household Account',
-      description: 'A simple and intuitive household budget management application.',
-      url: 'https://app.haruharu.me',
-      thumbnail: '/thumbnails/diet-app.png',
-      tags: ['Web App', 'React', 'Firebase'],
+      id: 'localbank',
+      title: 'LocalBank',
+      description: 'A premium, secure offline vault for financial assets with PayPal and Email integration.',
+      url: 'https://localbank.next-haru.com',
+      thumbnail: '/thumbnails/localbank.png',
+      tags: ['Next.js', 'FinTech', 'Premium'],
     },
   ],
 
