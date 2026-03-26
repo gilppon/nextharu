@@ -26,6 +26,14 @@ const portfolioData = {
       thumbnail: '/thumbnails/japan-run-fit.png',
       tags: ['Fitness', 'Game'],
     },
+    {
+      id: 'galaxy-words',
+      title: 'Galaxy Words',
+      description: 'AI-powered swipe party word game. AI가 실시간으로 생성하는 트렌드 단어로 즐기는 스릴 넘치는 파티 게임!',
+      url: 'https://word-dj5.pages.dev/',
+      thumbnail: '/thumbnails/galaxy-words.png',
+      tags: ['AI', 'Game', 'Party', 'Swipe'],
+    },
   ],
 
   // 🍊 오렌지 (Orange | ROOTS) 클릭 시 표시
