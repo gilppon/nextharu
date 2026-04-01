@@ -54,6 +54,14 @@ const portfolioData = {
       thumbnail: '/thumbnails/localbank.png',
       tags: ['Next.js', 'FinTech', 'Premium'],
     },
+    {
+      id: 'aether',
+      title: 'Aether',
+      description: 'Sync your biological rhythm with celestial insights. AI-driven archetype analysis and spiritual rituals for modern life.',
+      url: 'https://aether.next-haru.com',
+      thumbnail: '/thumbnails/aether.png',
+      tags: ['AI', 'Spiritual', 'Next.js', 'Premium'],
+    },
   ],
 
   // 🍎 사과 (Apple | HELLO) 클릭 시 표시
