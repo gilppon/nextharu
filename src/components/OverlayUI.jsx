@@ -23,22 +23,54 @@ export default function OverlayUI() {
         setTarget('entrance');
     };
 
-    // Dynamic Title Mapping
-    const titles = {
-        strawberry: 'Games | Next Haru',
-        orange: 'About Me | Next Haru',
-        grape: 'Projects | Next Haru',
-        apple: 'Contact | Next Haru',
-        terms: 'Terms of Service | Next Haru',
-        privacy: 'Privacy Policy | Next Haru',
-        refund: 'Refund Policy | Next Haru',
-        tokushoho: 'Legal Notice | Next Haru',
+    // Dynamic SEO Metadata Mapping
+    const seoData = {
+        strawberry: {
+            title: 'Games | Next Haru',
+            description: 'Play immersive browser games crafted with AI and 3D technology by Next Haru. Experience the fusion of innovation and entertainment.',
+        },
+        orange: {
+            title: 'About Me | Next Haru',
+            description: 'Meet Next Haru — an AI developer building digital solutions that bridge technology and human experience.',
+        },
+        grape: {
+            title: 'Projects | Next Haru',
+            description: 'Discover innovative projects by Next Haru, from AI-powered tools to interactive 3D web experiences.',
+        },
+        apple: {
+            title: 'Contact | Next Haru',
+            description: 'Get in touch with Next Haru. Reach out for collaboration, inquiries, or just to say hello.',
+        },
+        terms: {
+            title: 'Terms of Service | Next Haru',
+            description: 'Read the Terms of Service for Next Haru products and services.',
+        },
+        privacy: {
+            title: 'Privacy Policy | Next Haru',
+            description: 'Learn how Next Haru collects, uses, and protects your personal information.',
+        },
+        refund: {
+            title: 'Refund Policy | Next Haru',
+            description: 'Understand the refund and cancellation policies for Next Haru services.',
+        },
+        tokushoho: {
+            title: 'Legal Notice | Next Haru',
+            description: 'Legal disclosure under the Specified Commercial Transactions Act (特定商取引法に基づく表記).',
+        },
+    };
+
+    const currentSeo = seoData[currentTarget] || {
+        title: 'Next Haru',
+        description: 'Explore the 3D portfolio of Next Haru, an AI developer crafting immersive games and digital solutions.',
     };
 
     return (
         <div className={`overlay-panel ${isOverlayVisible ? 'visible' : ''}`}>
             <Helmet>
-                <title>{titles[currentTarget] || 'Next Haru'}</title>
+                <title>{currentSeo.title}</title>
+                <meta name="description" content={currentSeo.description} />
+                <meta property="og:title" content={currentSeo.title} />
+                <meta property="og:description" content={currentSeo.description} />
             </Helmet>
             <button className="back-btn" onClick={handleBack}>
                 ← Back to Forest
