@@ -11,6 +11,14 @@ const portfolioData = {
   // 🍓 딸기 (Strawberry | ADVENTURE) 클릭 시 표시
   games: [
     {
+      id: 'ninja-pattern-slice',
+      title: 'Ninja Pattern Slice',
+      description: 'High-speed Pattern Slice action where 0.1s makes all the difference! Break your limits now in browser.',
+      url: 'https://ninja.next-haru.com',
+      thumbnail: '/thumbnails/ninja-pattern-slice.png',
+      tags: ['Action', 'Game', 'Roguelike'],
+    },
+    {
       id: 'vocal-orbit',
       title: 'Vocal Orbit',
       description: 'A voice-controlled space flight game. Pilot your spaceship using your own voice!',
