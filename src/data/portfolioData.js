@@ -70,6 +70,14 @@ const portfolioData = {
       thumbnail: '/thumbnails/aether.png',
       tags: ['AI', 'Spiritual', 'Next.js', 'Premium'],
     },
+    {
+      id: 'kanjigen-ai',
+      title: 'KanjiGen AI — Your Heritage Artist',
+      description: 'AI-powered authentic Japanese name generation with bespoke Hanko seals and family heritage design.',
+      url: 'https://kanji.next-haru.com',
+      thumbnail: '/thumbnails/kanjigen-ai.png',
+      tags: ['AI', 'Heritage', 'Arts', 'Next.js'],
+    },
   ],
 
   // 🍎 사과 (Apple | HELLO) 클릭 시 표시
