@@ -85,6 +85,7 @@ const portfolioData = {
     email: 'support@next-haru.com',
     github: 'https://github.com/gilppon',
     twitter: 'https://twitter.com/nextharu',
+    LinkedIn: 'https://www.linkedin.com/in/next-haru',
   },
 };
 
