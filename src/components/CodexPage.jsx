@@ -146,7 +146,7 @@ function Hero() {
             </div>
 
             <motion.p className="hero-overline" {...reveal} transition={{ ...reveal.transition, delay: 0.3 }}>
-                // NEXT-HARU ARCHIVE — EST.2025
+                // NEXT-HARU ARCHIVE — EST.2026
             </motion.p>
             <motion.h1 className="hero-title" {...reveal} transition={{ ...reveal.transition, delay: 0.4 }}>
                 NEXT HARU
