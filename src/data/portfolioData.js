@@ -85,7 +85,15 @@ const portfolioData = {
     email: 'support@next-haru.com',
     github: 'https://github.com/gilppon',
     twitter: 'https://twitter.com/nextharu',
-    LinkedIn: 'https://www.linkedin.com/in/next-haru',
+    linkedin: 'https://www.linkedin.com/in/next-haru',
+  },
+
+  // 🖼️ 챕터 초상 이미지 — public/art/ 폴더의 파일과 연결됨 (3:4 비율 권장)
+  chapterArt: {
+    strawberry: '/art/chapter-games.png',
+    orange: '/art/chapter-about.png',
+    grape: '/art/chapter-projects.png',
+    apple: '/art/chapter-contact.png',
   },
 };
 

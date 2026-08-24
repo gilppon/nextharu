@@ -1,119 +1,264 @@
+/* ===== Cinematic preloader — NEXT HARU ===== */
+
 .loading-screen {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    /* Very dark, atmospheric background */
-    background: radial-gradient(circle at center, #1a1a1a 0%, #000 100%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    inset: 0;
     z-index: 9999;
+    overflow: hidden;
 }
 
-.loading-content-nextharu {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 4rem;
-    width: 90%;
-    max-width: 1200px;
-}
-
-.letters-container {
-    display: flex;
-    flex-wrap: nowrap;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-    perspective: 1000px;
-}
-
-.letter-wrapper {
-    width: clamp(40px, 10vw, 120px);
-    height: clamp(60px, 15vw, 180px);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    will-change: transform, opacity;
-    /* CSS 3D styling for extra depth */
-    transform-style: preserve-3d;
-}
-
-.letter-image {
+/* --- Background video --- */
+.ls-video {
+    position: absolute;
+    inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    /* JPEGs have a black background. Use screen to make black transparent and keep the lights glowing! */
-    mix-blend-mode: screen;
-    filter: drop-shadow(0 0 15px rgba(255, 100, 100, 0.4)) contrast(1.3) brightness(0.95);
+    z-index: 0;
 }
 
-.loading-info {
+/* --- Column backdrop (curtain panels) --- */
+.ls-cols {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    will-change: transform;
+    z-index: 1;
+}
+
+.ls-cols span {
+    flex: 1;
+    background: #060608;
+}
+
+.ls-cols span:nth-child(even) {
+    background: #0b0b0f;
+}
+
+/* With video: columns hidden until the exit curtain covers the video */
+.loading-screen.has-video .ls-cols {
+    opacity: 0;
+}
+
+/* --- Film grain --- */
+.ls-grain {
+    position: absolute;
+    inset: -100px;
+    pointer-events: none;
+    z-index: 2;
+    opacity: 0.055;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 256px 256px;
+    animation: ls-grain-jitter 0.6s steps(4) infinite;
+}
+
+@keyframes ls-grain-jitter {
+    0% { transform: translate(0, 0); }
+    25% { transform: translate(-40px, 30px); }
+    50% { transform: translate(30px, -50px); }
+    75% { transform: translate(-25px, -25px); }
+    100% { transform: translate(45px, 40px); }
+}
+
+/* --- Vignette --- */
+.ls-vignette {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 2;
+    background: radial-gradient(ellipse at center, transparent 35%, rgba(0, 0, 0, 0.65) 100%);
+}
+
+/* Extra darkening over video so text stays readable */
+.loading-screen.has-video .ls-vignette {
+    background:
+        linear-gradient(rgba(2, 2, 6, 0.45), rgba(2, 2, 6, 0.45)),
+        radial-gradient(ellipse at center, transparent 30%, rgba(0, 0, 0, 0.75) 100%);
+}
+
+/* --- Top progress hairline --- */
+.ls-hairline {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-    max-width: 400px;
+    height: 2px;
+    background: linear-gradient(90deg, #ff4d4d, #ff8a8a);
+    box-shadow: 0 0 12px rgba(255, 77, 77, 0.7);
+    transform-origin: left center;
+    z-index: 4;
+}
+
+/* --- Content layout --- */
+.ls-content {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: clamp(1.25rem, 4vw, 3rem);
+    z-index: 3;
+}
+
+.ls-top,
+.ls-bottom {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1.5rem;
+}
+
+.ls-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: clamp(0.6rem, 1vw, 0.72rem);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.45);
+    white-space: nowrap;
+}
+
+.ls-label:first-child {
+    color: #ff8a8a;
+}
+
+/* --- Wordmark --- */
+.ls-center {
     text-align: center;
 }
 
-.progress-bar-container {
-    width: 100%;
-    height: 4px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 2px;
-    overflow: hidden;
-    margin-bottom: 1rem;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-}
-
-.progress-bar-fill {
-    height: 100%;
-    background: linear-gradient(90deg, #ff4d4d, #ff9999, #ffffff);
-    box-shadow: 0 0 15px rgba(255, 77, 77, 0.8);
-    border-radius: 2px;
-}
-
-.progress-details {
-    display: flex;
-    justify-content: center;
-}
-
-.progress-text {
-    font-size: 0.9rem;
-    font-weight: 300;
-    color: #ff9999;
-    font-family: 'JetBrains Mono', monospace;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-}
-
-.enter-prompt {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 40px;
-    /* Matched to rough height of progress bar area */
-}
-
-.click-to-enter {
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: #ffffff;
-    font-family: 'JetBrains Mono', monospace;
-    letter-spacing: 0.2em;
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 77, 77, 0.6);
-    cursor: pointer;
+.ls-wordmark {
     margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0 0.08em;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: clamp(3rem, 13vw, 11rem);
+    line-height: 0.95;
+    letter-spacing: 0.02em;
+    color: #fff;
+    user-select: none;
 }
 
-@media (max-width: 768px) {
-    .letters-container {
-        gap: 0.2rem;
+.ls-wm-mask {
+    display: inline-block;
+    overflow: hidden;
+    will-change: transform;
+}
+
+.ls-wm-char {
+    display: inline-block;
+    will-change: transform;
+    text-shadow: 0 0 60px rgba(255, 77, 77, 0.15);
+}
+
+.ls-wm-space {
+    display: inline-block;
+    width: 0.35em;
+}
+
+.ls-divider {
+    height: 1px;
+    margin: clamp(1rem, 2.5vw, 1.75rem) auto;
+    max-width: min(560px, 70%);
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35) 20%, #ff4d4d 50%, rgba(255, 255, 255, 0.35) 80%, transparent);
+    transform-origin: center;
+}
+
+.ls-sub {
+    margin: 0;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: clamp(0.62rem, 1.2vw, 0.78rem);
+    font-weight: 400;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.55);
+}
+
+/* --- Bottom row --- */
+.ls-status {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: clamp(0.62rem, 1.1vw, 0.75rem);
+    letter-spacing: 0.16em;
+    color: rgba(255, 255, 255, 0.65);
+    text-transform: uppercase;
+    min-width: 220px;
+}
+
+.ls-cursor {
+    width: 8px;
+    height: 14px;
+    background: #ff4d4d;
+    animation: ls-blink 1s steps(2) infinite;
+}
+
+@keyframes ls-blink {
+    0%, 49% { opacity: 1; }
+    50%, 100% { opacity: 0; }
+}
+
+.ls-pct-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: clamp(0.62rem, 1.1vw, 0.75rem);
+    letter-spacing: 0.3em;
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.ls-enter {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: clamp(0.75rem, 1.3vw, 0.95rem);
+    font-weight: 500;
+    letter-spacing: 0.24em;
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    padding: 0.85em 1.8em;
+    animation: ls-enter-pulse 1.8s ease-in-out infinite;
+    transition: border-color 0.3s ease;
+}
+
+.loading-screen.is-ready:hover .ls-enter {
+    border-color: #ff4d4d;
+}
+
+@keyframes ls-enter-pulse {
+    0%, 100% { opacity: 0.55; }
+    50% { opacity: 1; }
+}
+
+/* --- Mobile --- */
+@media (max-width: 640px) {
+    .ls-top {
+        align-items: flex-start;
     }
 
-    .letter-wrapper {
-        width: clamp(30px, 11vw, 50px);
-        height: clamp(45px, 16vw, 75px);
+    .ls-label:last-child {
+        display: none;
+    }
+
+    .ls-status {
+        min-width: 0;
+    }
+
+    .ls-bottom {
+        flex-wrap: wrap;
+        row-gap: 1rem;
+    }
+}
+
+/* --- Reduced motion --- */
+@media (prefers-reduced-motion: reduce) {
+    .ls-grain {
+        animation: none;
+    }
+
+    .ls-cursor,
+    .ls-enter {
+        animation: none;
+        opacity: 1;
     }
 }
