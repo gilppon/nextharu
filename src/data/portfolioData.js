@@ -58,7 +58,7 @@ const portfolioData = {
       id: 'kodari-local-rag-os',
       title: 'KODARI LOCAL RAG OS (Enterprise Suite)',
       description: 'Military-grade, 100% air-gapped on-premise AI Operating System. Zero cloud leaks, private SLM fine-tuning, hybrid RAG, and self-healing multi-agent knowledge loop for defense, finance, and enterprise.',
-      url: 'https://slm-agent-home.pages.dev',
+      url: 'https://rag.next-haru.com',
       thumbnail: '/thumbnails/kodari-rag-os.png',
       tags: ['Enterprise AI', 'Air-Gapped', 'Private SLM', 'ChromaDB', 'Defense'],
     },
