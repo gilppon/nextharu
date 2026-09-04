@@ -47,13 +47,21 @@ const portfolioData = {
   // 🍊 오렌지 (Orange | ROOTS) 클릭 시 표시
   about: {
     name: 'Next Haru',
-    title: 'AI Crafting Digital Solutions for Everyday Life',
-    bio: `As a Korean developer and father of two living in Japan, my greatest inspiration comes from the chaos and beauty of real life. Whether it’s an AI tool for busy parents, an immersive game, or a fitness app that moves the soul, I create at the synergy of technology and human experience. I believe that the best code is written with empathy, designed to make every "Nextharu" (Next Day) better than the last`,
-    skills: ['React', 'Flutter', 'Expo', 'Firebase', 'Three.js', 'Node.js'],
+    title: 'Enterprise AI Systems Architect & Founder',
+    bio: `Enterprise AI Systems Architect and Deep-Tech Founder specializing in military-grade, 100% air-gapped on-premise AI Operating Systems and sovereign data architectures. Engineering mission-critical Private SLM fine-tuning, hybrid vector retrieval, and self-healing knowledge loops that guarantee zero cloud leakage. Bridging uncompromising enterprise defense with high-concurrency systems to empower global organizations to unconditionally own and govern their intelligence.`,
+    skills: ['Enterprise RAG', 'Private SLM (LoRA)', 'Air-Gapped Security', 'ChromaDB / BM25', 'Python / PyTorch', 'React', 'Three.js', 'Node.js / FastAPI'],
   },
 
   // 🍇 포도 (Grape | TREASURES) 클릭 시 표시
   projects: [
+    {
+      id: 'kodari-local-rag-os',
+      title: 'KODARI LOCAL RAG OS (Enterprise Suite)',
+      description: 'Military-grade, 100% air-gapped on-premise AI Operating System. Zero cloud leaks, private SLM fine-tuning, hybrid RAG, and self-healing multi-agent knowledge loop for defense, finance, and enterprise.',
+      url: 'https://slm-agent-home.pages.dev',
+      thumbnail: '/thumbnails/kodari-rag-os.png',
+      tags: ['Enterprise AI', 'Air-Gapped', 'Private SLM', 'ChromaDB', 'Defense'],
+    },
     {
       id: 'localbank',
       title: 'LocalBank',
