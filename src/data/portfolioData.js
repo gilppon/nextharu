@@ -11,6 +11,14 @@ const portfolioData = {
   // 🍓 딸기 (Strawberry | ADVENTURE) 클릭 시 표시
   games: [
     {
+      id: 'deceptive-guide',
+      title: 'Deceptive Guide (거짓말하는 튜토리얼)',
+      description: 'Never trust your guide. A psychological meta-deduction puzzle adventure with 6 physical laws. Play directly in your browser or download for Windows on itch.io!',
+      url: 'https://nextharu.itch.io/deceptive-guide',
+      thumbnail: '/thumbnails/deceptive-guide.png',
+      tags: ['Psychological', 'Puzzle', 'Meta', 'itch.io', 'HTML5'],
+    },
+    {
       id: 'ninja-pattern-slice',
       title: 'Ninja Pattern Slice',
       description: 'High-speed Pattern Slice action where 0.1s makes all the difference! Break your limits now in browser.',
