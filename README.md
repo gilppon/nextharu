@@ -1,16 +1,27 @@
-# React + Vite
+# Next Haru Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+An interactive portfolio for Next Haru, focused on private AI systems, agent security, and digital products. The site is built with React and Vite, with motion effects and an editorial, chapter-based layout.
 
-Currently, two official plugins are available:
+## Run locally
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+```bash
+npm ci
+npm run dev
+```
 
-## React Compiler
+## Verify a change
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+```bash
+npm run lint
+npm run build
+npm audit
+```
 
-## Expanding the ESLint configuration
+## Content and assets
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- Project cards, profile copy, contact links, and chapter artwork mappings live in `src/data/portfolioData.js`.
+- The main portfolio layout and interactions live in `src/components/CodexPage.jsx` and `src/components/CodexPage.css`.
+- Static media and thumbnails live in `public/`.
+- Page title, share metadata, canonical URL, and structured data live in `index.html`.
+
+Project links open their own demo sites in a new tab. Keep performance measurements and security claims paired with a benchmark method or supporting evidence before publishing them.

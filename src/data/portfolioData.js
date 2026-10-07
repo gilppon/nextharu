@@ -15,7 +15,7 @@ const portfolioData = {
       title: 'Deceptive Guide (거짓말하는 튜토리얼)',
       description: 'Never trust your guide. A psychological meta-deduction puzzle adventure with 6 physical laws. Play directly in your browser or download for Windows on itch.io!',
       url: 'https://nextharu.itch.io/deceptive-guide',
-      thumbnail: '/thumbnails/deceptive-guide.png',
+      thumbnail: '/optimized/thumbnails/deceptive-guide.webp',
       tags: ['Psychological', 'Puzzle', 'Meta', 'itch.io', 'HTML5'],
     },
     {
@@ -23,7 +23,7 @@ const portfolioData = {
       title: 'Ninja Pattern Slice',
       description: 'High-speed Pattern Slice action where 0.1s makes all the difference! Break your limits now in browser.',
       url: 'https://ninja.next-haru.com',
-      thumbnail: '/thumbnails/ninja-pattern-slice.png',
+      thumbnail: '/optimized/thumbnails/ninja-pattern-slice.webp',
       tags: ['Action', 'Game', 'Roguelike'],
     },
     {
@@ -31,7 +31,7 @@ const portfolioData = {
       title: 'Vocal Orbit',
       description: 'A voice-controlled space flight game. Pilot your spaceship using your own voice!',
       url: 'https://vocal.next-haru.com',
-      thumbnail: '/thumbnails/vocal-orbit.png',
+      thumbnail: '/optimized/thumbnails/vocal-orbit.webp',
       tags: ['Voice Control', 'Game', 'Expo Web'],
     },
     {
@@ -39,7 +39,7 @@ const portfolioData = {
       title: 'Japan Run Fit',
       description: 'A fitness running game that lets you travel through Japan while you run.',
       url: 'https://fit.next-haru.com',
-      thumbnail: '/thumbnails/japan-run-fit.png',
+      thumbnail: '/optimized/thumbnails/japan-run-fit.webp',
       tags: ['Fitness', 'Game'],
     },
     {
@@ -47,7 +47,7 @@ const portfolioData = {
       title: 'Galaxy Words',
       description: 'AI-powered swipe party word game. AI가 실시간으로 생성하는 트렌드 단어로 즐기는 스릴 넘치는 파티 게임!',
       url: 'https://word-dj5.pages.dev/',
-      thumbnail: '/thumbnails/galaxy-words.png',
+      thumbnail: '/optimized/thumbnails/galaxy-words.webp',
       tags: ['AI', 'Game', 'Party', 'Swipe'],
     },
   ],
@@ -56,8 +56,8 @@ const portfolioData = {
   about: {
     name: 'Next Haru',
     title: 'Enterprise AI Systems Architect & Founder',
-    bio: `Enterprise AI Systems Architect and Deep-Tech Founder specializing in military-grade, 100% air-gapped on-premise AI Operating Systems and sovereign data architectures. Engineering mission-critical Private SLM fine-tuning, hybrid vector retrieval, and self-healing knowledge loops that guarantee zero cloud leakage. Bridging uncompromising enterprise defense with high-concurrency systems to empower global organizations to unconditionally own and govern their intelligence.`,
-    skills: ['Enterprise RAG', 'Private SLM (LoRA)', 'Air-Gapped Security', 'ChromaDB / BM25', 'Python / PyTorch', 'React', 'Three.js', 'Node.js / FastAPI'],
+    bio: `Enterprise AI systems architect and deep-tech founder building on-premise AI platforms, private SLM workflows, hybrid retrieval, and agent security tools. Focused on practical data control, resilient knowledge systems, and clear operational boundaries.`,
+    skills: ['Enterprise RAG', 'Private SLM (LoRA)', 'On-Prem Security', 'AI Agent Security', 'ChromaDB / BM25', 'Python / PyTorch', 'React', 'Three.js', 'Node.js / FastAPI'],
   },
 
   // 🍇 포도 (Grape | TREASURES) 클릭 시 표시
@@ -65,17 +65,27 @@ const portfolioData = {
     {
       id: 'kodari-local-rag-os',
       title: 'KODARI LOCAL RAG OS (Enterprise Suite)',
-      description: 'Military-grade, 100% air-gapped on-premise AI Operating System. Zero cloud leaks, private SLM fine-tuning, hybrid RAG, and self-healing multi-agent knowledge loop for defense, finance, and enterprise.',
+      description: 'On-premise AI platform for private SLM workflows and hybrid retrieval, designed for teams that need to keep knowledge processing under local control.',
       url: 'https://rag.next-haru.com',
-      thumbnail: '/thumbnails/kodari-rag-os.png',
-      tags: ['Enterprise AI', 'Air-Gapped', 'Private SLM', 'ChromaDB', 'Defense'],
+      thumbnail: '/optimized/thumbnails/kodari-rag-os.webp',
+      tags: ['Enterprise AI', 'On-Prem', 'Private SLM', 'ChromaDB', 'Defense'],
+      featured: true,
+    },
+    {
+      id: 'ai-security-control-plane',
+      title: 'AI Security Control Plane (Cyber War-Room)',
+      description: 'In-process SDK and defensive control plane for autonomous agents, with demonstrations of prompt-injection, tool-privilege, and credential-exposure defenses.',
+      url: 'https://ai-security.next-haru.com',
+      thumbnail: '/optimized/thumbnails/ai-security.webp',
+      tags: ['AI Security', 'Control Plane', 'Defensive AI', 'FastAPI', 'Cyber War-Room'],
+      featured: true,
     },
     {
       id: 'localbank',
       title: 'LocalBank',
       description: 'A premium, secure offline vault for financial assets with PayPal and Email integration.',
       url: 'https://localbank.next-haru.com',
-      thumbnail: '/thumbnails/localbank.png',
+      thumbnail: '/optimized/thumbnails/localbank.webp',
       tags: ['Next.js', 'FinTech', 'Premium'],
     },
     {
@@ -83,7 +93,7 @@ const portfolioData = {
       title: 'Aether',
       description: 'Sync your biological rhythm with celestial insights. AI-driven archetype analysis and spiritual rituals for modern life.',
       url: 'https://aether.next-haru.com',
-      thumbnail: '/thumbnails/aether.png',
+      thumbnail: '/optimized/thumbnails/aether.webp',
       tags: ['AI', 'Spiritual', 'Next.js', 'Premium'],
     },
     {
@@ -91,7 +101,7 @@ const portfolioData = {
       title: 'KanjiGen AI — Your Heritage Artist',
       description: 'AI-powered authentic Japanese name generation with bespoke Hanko seals and family heritage design.',
       url: 'https://kanji.next-haru.com',
-      thumbnail: '/thumbnails/kanjigen-ai.png',
+      thumbnail: '/optimized/thumbnails/kanjigen-ai.webp',
       tags: ['AI', 'Heritage', 'Arts', 'Next.js'],
     },
   ],
@@ -106,10 +116,10 @@ const portfolioData = {
 
   // 🖼️ 챕터 초상 이미지 — public/art/ 폴더의 파일과 연결됨 (3:4 비율 권장)
   chapterArt: {
-    strawberry: '/art/chapter-games.png',
-    orange: '/art/chapter-about.png',
-    grape: '/art/chapter-projects.png',
-    apple: '/art/chapter-contact.png',
+    strawberry: '/optimized/art/chapter-games.webp',
+    orange: '/optimized/art/chapter-about.webp',
+    grape: '/optimized/art/chapter-projects.webp',
+    apple: '/optimized/art/chapter-contact.webp',
   },
 };
 

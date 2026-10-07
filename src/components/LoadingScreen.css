@@ -210,15 +210,29 @@
 }
 
 .ls-enter {
+    appearance: none;
     font-family: 'JetBrains Mono', monospace;
     font-size: clamp(0.75rem, 1.3vw, 0.95rem);
     font-weight: 500;
     letter-spacing: 0.24em;
     color: #fff;
+    background: transparent;
+    border-radius: 0;
     border: 1px solid rgba(255, 255, 255, 0.35);
     padding: 0.85em 1.8em;
+    cursor: pointer;
     animation: ls-enter-pulse 1.8s ease-in-out infinite;
     transition: border-color 0.3s ease;
+}
+
+.ls-enter:disabled {
+    cursor: wait;
+    opacity: 0.6;
+}
+
+.ls-enter:focus-visible {
+    outline: 2px solid #ff4d4d;
+    outline-offset: 4px;
 }
 
 .loading-screen.is-ready:hover .ls-enter {

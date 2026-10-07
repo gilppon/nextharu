@@ -42,12 +42,11 @@ function scrambleTo(el, target) {
 }
 
 export default function LoadingScreen() {
-    const { progress, active } = useProgress();
+    const { progress } = useProgress();
     const [isReady, setIsReady] = useState(false);
     const [hasClicked, setHasClicked] = useState(false);
     const [exiting, setExiting] = useState(false);
     const [videoOk, setVideoOk] = useState(true);
-    const [videoEnded, setVideoEnded] = useState(REDUCED_MOTION);
     const [statusIndex, setStatusIndex] = useState(0);
 
     const videoRef = useRef(null);
@@ -121,17 +120,9 @@ export default function LoadingScreen() {
         scrambleTo(statusEl.current, isReady ? 'READY' : STATUS_MESSAGES[statusIndex]);
     }, [statusIndex, isReady]);
 
-    // Ready state: assets loaded (or nothing to load) AND video played through at least once
+    // Let visitors enter after the visual intro settles; decorative assets must not block the site.
     useEffect(() => {
-        if ((progress >= 100 || !active) && (videoEnded || !videoOk)) {
-            const t = setTimeout(() => setIsReady(true), 400);
-            return () => clearTimeout(t);
-        }
-        return undefined;
-    }, [progress, active, videoEnded, videoOk]);
-
-    useEffect(() => {
-        const t = setTimeout(() => setIsReady(true), 15000);
+        const t = setTimeout(() => setIsReady(true), 1200);
         return () => clearTimeout(t);
     }, []);
 
@@ -169,8 +160,7 @@ export default function LoadingScreen() {
             {!hasClicked && (
                 <motion.div
                 className={`loading-screen${isReady ? ' is-ready' : ''}${videoOk ? ' has-video' : ''}${exiting ? ' is-exiting' : ''}`}
-                onClick={handleEnter}
-                style={{ cursor: isReady ? 'pointer' : 'default' }}
+                aria-busy={!isReady}
                 initial={{ opacity: 1 }}
                 exit={{ opacity: 0, transition: { duration: 0.3, ease: 'easeOut' } }}
             >
@@ -181,12 +171,11 @@ export default function LoadingScreen() {
                         src="/assets/loading/intro.mp4"
                         muted
                         playsInline
-                        preload="auto"
+                        preload="metadata"
                         onCanPlayThrough={(e) => {
                             e.currentTarget.play().catch(() => {});
                         }}
                         onEnded={(e) => {
-                            setVideoEnded(true);
                             e.currentTarget.play().catch(() => {});
                         }}
                         onStalled={(e) => {
@@ -206,14 +195,14 @@ export default function LoadingScreen() {
                 <motion.div
                     className="ls-hairline ls-fade"
                     initial={{ scaleX: 0 }}
-                    animate={{ scaleX: progress / 100 }}
+                    animate={{ scaleX: isReady ? 1 : progress / 100 }}
                     transition={{ duration: 0.5, ease: 'easeOut' }}
                 />
 
                 <div className="ls-content" ref={uiRef}>
                     <header className="ls-top">
                         <span className="ls-label ls-fade">// NEXT-HARU.COM</span>
-                        <span className="ls-label ls-fade">IMMERSIVE 3D PORTFOLIO — EST.2025</span>
+                        <span className="ls-label ls-fade">PRIVATE AI & DIGITAL PRODUCTS — EST.2026</span>
                     </header>
 
                     <div className="ls-center">
@@ -231,13 +220,13 @@ export default function LoadingScreen() {
                             )}
                         </h1>
                         <div className="ls-divider" aria-hidden="true" />
-                        <p className="ls-sub ls-fade">AI DEVELOPER — GAMES &amp; DIGITAL SOLUTIONS</p>
+                        <p className="ls-sub ls-fade">PRIVATE AI SYSTEMS — AGENT SECURITY &amp; DIGITAL PRODUCTS</p>
                     </div>
 
                     <footer className="ls-bottom">
                         <div className="ls-status ls-fade">
                             <span className="ls-cursor" aria-hidden="true" />
-                            <span ref={statusEl}>INITIALIZING WORLD</span>
+                        <span ref={statusEl} aria-live={isReady ? 'polite' : 'off'}>INITIALIZING WORLD</span>
                         </div>
 
                         <AnimatePresence mode="wait">
@@ -252,15 +241,19 @@ export default function LoadingScreen() {
                                     LOADING
                                 </motion.span>
                             ) : (
-                                <motion.span
+                                <motion.button
                                     key="enter"
                                     className="ls-enter ls-fade"
                                     initial={{ opacity: 0, y: 10 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ duration: 0.5 }}
+                                    type="button"
+                                    onClick={handleEnter}
+                                    disabled={exiting}
+                                    aria-label="Enter the portfolio"
                                 >
-                                    [ CLICK TO ENTER ]
-                                </motion.span>
+                                    [ ENTER THE EXPERIENCE ]
+                                </motion.button>
                             )}
                         </AnimatePresence>
                     </footer>

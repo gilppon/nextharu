@@ -89,5 +89,6 @@ canvas {
 
 .footer-btn:focus,
 .footer-btn:focus-visible {
-  outline: none;
+  outline: 2px solid #ff4d4d;
+  outline-offset: 4px;
 }

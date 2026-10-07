@@ -17,9 +17,12 @@ class ErrorBoundary extends React.Component {
     render() {
         if (this.state.hasError) {
             return (
-                <div style={{ padding: '20px', color: 'red', background: 'white', position: 'absolute', zIndex: 9999 }}>
-                    <h1>Rendering Error</h1>
-                    <pre>{this.state.error && this.state.error.toString()}</pre>
+                <div role="alert" style={{ padding: '24px', color: '#e8e6e0', background: '#070709', minHeight: '100vh' }}>
+                    <h1>Something went wrong</h1>
+                    <p>Please refresh the page and try again.</p>
+                    {import.meta.env.DEV && this.state.error && (
+                        <pre style={{ whiteSpace: 'pre-wrap', color: '#ff8a8a' }}>{this.state.error.toString()}</pre>
+                    )}
                 </div>
             );
         }

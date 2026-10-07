@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 // eslint-disable-next-line no-unused-vars
 import { motion } from 'framer-motion';
 import portfolioData from '../data/portfolioData';
@@ -9,11 +9,11 @@ import Tokushoho from './Tokushoho';
 import './CodexPage.css';
 
 const HERO_FRAMES = [
-    { src: '/art/hero-1.png', kanji: '波' },
-    { src: '/art/hero-2.png', kanji: '鬼' },
-    { src: '/art/hero-3.png', kanji: '鯉' },
-    { src: '/art/hero-4.png', kanji: '鳥居' },
-    { src: '/art/hero-5.png', kanji: '桜' },
+    { src: '/optimized/art/hero-1.webp', kanji: '波' },
+    { src: '/optimized/art/hero-2.webp', kanji: '鬼' },
+    { src: '/optimized/art/hero-3.webp', kanji: '鯉' },
+    { src: '/optimized/art/hero-4.webp', kanji: '鳥居' },
+    { src: '/optimized/art/hero-5.webp', kanji: '桜' },
 ];
 
 const LEGAL_META = {
@@ -117,12 +117,14 @@ function CodexBg() {
     if (failed) return null;
     return (
         <div className="codex-bg" aria-hidden="true">
-            <img src="/art/bg-main.png" alt="" onError={() => setFailed(true)} />
+            <img src="/optimized/art/bg-main.webp" alt="" onError={() => setFailed(true)} />
         </div>
     );
 }
 
 function Hero() {
+    const email = portfolioData.contact.email;
+
     return (
         <section className="hero">
             <div className="hero-gallery">
@@ -138,7 +140,9 @@ function Hero() {
                         <img
                             src={frame.src}
                             alt=""
-                            loading="eager"
+                            loading={i === 2 ? 'eager' : 'lazy'}
+                            fetchPriority={i === 2 ? 'high' : 'auto'}
+                            decoding="async"
                             onError={(e) => { e.currentTarget.style.display = 'none'; }}
                         />
                     </motion.div>
@@ -153,8 +157,12 @@ function Hero() {
             </motion.h1>
             <motion.div className="hero-ornament" {...reveal} transition={{ ...reveal.transition, delay: 0.5 }} aria-hidden="true" />
             <motion.p className="hero-sub" {...reveal} transition={{ ...reveal.transition, delay: 0.55 }}>
-                AI CRAFTING DIGITAL SOLUTIONS FOR EVERYDAY LIFE
+                PRIVATE AI SYSTEMS · AGENT SECURITY · DIGITAL PRODUCTS
             </motion.p>
+            <motion.div className="hero-actions" {...reveal} transition={{ ...reveal.transition, delay: 0.62 }}>
+                <a href="#treasures" className="hero-action hero-action-primary">VIEW FEATURED WORK <span aria-hidden="true">↘</span></a>
+                <a href={`mailto:${email}`} className="hero-action">DISCUSS A PROJECT <span aria-hidden="true">↗</span></a>
+            </motion.div>
             <motion.a href="#roots" className="hero-scroll" {...reveal} transition={{ ...reveal.transition, delay: 0.7 }}>
                 SCROLL ▼
             </motion.a>
@@ -209,20 +217,21 @@ function EntryGrid({ items, fallbackEmoji, emptyType }) {
     return (
         <div className="cx-entries">
             {items.map((item, i) => (
-                <a href={item.url} target="_blank" rel="noopener noreferrer" key={item.id} className="project-card">
+                <a href={item.url} target="_blank" rel="noopener noreferrer" key={item.id} className={`project-card${item.featured ? ' is-featured' : ''}`}>
                     <div className="cx-entry-head">
                         <span className="cx-entry-no">No.{String(i + 1).padStart(3, '0')}</span>
-                        <span className="cx-entry-type">{item.tags?.[0] || emptyType}</span>
+                        <span className="cx-entry-type">{item.featured ? 'FEATURED · ' : ''}{item.tags?.[0] || emptyType}</span>
                     </div>
                     <div className="card-thumbnail">
                         {item.thumbnail ? (
-                            <img src={item.thumbnail} alt={item.title} className="card-image" />
+                            <img src={item.thumbnail} alt="" loading="lazy" decoding="async" className="card-image" />
                         ) : (
                             <span className="card-emoji">{fallbackEmoji}</span>
                         )}
                     </div>
                     <h3>{item.title}</h3>
                     <p>{item.description}</p>
+                    <span className="project-card-link">OPEN PROJECT <span aria-hidden="true">↗</span></span>
                     <div className="tag-row">
                         {item.tags?.map((tag) => (
                             <span key={tag} className="tag">{tag}</span>
@@ -297,21 +306,71 @@ function ContactContent({ onLegal }) {
 }
 
 function LegalModal({ view, onClose }) {
+    const modalRef = useRef(null);
+    const closeButtonRef = useRef(null);
+
+    useEffect(() => {
+        if (!view) return undefined;
+
+        const previouslyFocused = document.activeElement;
+        const modal = modalRef.current;
+        closeButtonRef.current?.focus();
+
+        const handleKeyDown = (event) => {
+            if (event.key === 'Escape') {
+                event.stopPropagation();
+                onClose();
+                return;
+            }
+
+            if (event.key !== 'Tab' || !modal) return;
+            const focusable = modal.querySelectorAll('a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])');
+            if (focusable.length === 0) {
+                event.preventDefault();
+                modal.focus();
+                return;
+            }
+
+            const first = focusable[0];
+            const last = focusable[focusable.length - 1];
+            if (!modal.contains(document.activeElement)) {
+                event.preventDefault();
+                first.focus();
+                return;
+            }
+            if (event.shiftKey && document.activeElement === first) {
+                event.preventDefault();
+                last.focus();
+            } else if (!event.shiftKey && document.activeElement === last) {
+                event.preventDefault();
+                first.focus();
+            }
+        };
+
+        document.addEventListener('keydown', handleKeyDown);
+        return () => {
+            document.removeEventListener('keydown', handleKeyDown);
+            if (previouslyFocused instanceof HTMLElement && previouslyFocused.isConnected) {
+                previouslyFocused.focus();
+            }
+        };
+    }, [view, onClose]);
+
     if (!view) return null;
     const meta = LEGAL_META[view];
     const { Component } = meta;
 
     return (
-        <div className="legal-modal" onClick={onClose} role="dialog" aria-modal="true">
-            <div className="legal-modal-frame" onClick={(e) => e.stopPropagation()}>
+        <div className="legal-modal" onClick={onClose} role="dialog" aria-modal="true" aria-labelledby="legal-dialog-title">
+            <div ref={modalRef} className="legal-modal-frame" onClick={(e) => e.stopPropagation()} tabIndex="-1">
                 <span className="ch-corner ch-tl" aria-hidden="true" />
                 <span className="ch-corner ch-tr" aria-hidden="true" />
                 <span className="ch-corner ch-bl" aria-hidden="true" />
                 <span className="ch-corner ch-br" aria-hidden="true" />
 
                 <header className="ch-head">
-                    <span className="cx-file">FILE//{meta.no} — {meta.label}</span>
-                    <button onClick={onClose} className="legal-close">✕ CLOSE</button>
+                    <span id="legal-dialog-title" className="cx-file">FILE//{meta.no} — {meta.label}</span>
+                    <button ref={closeButtonRef} onClick={onClose} className="legal-close">✕ CLOSE</button>
                 </header>
 
                 <div className="legal-modal-body">
